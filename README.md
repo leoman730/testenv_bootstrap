@@ -11,3 +11,8 @@ As mentions above, this project basically pulling ideas from the resources that 
 3. http://jspro.com/toolsandlibraries/headless-webkit-and-phantomjs/
 
 4. https://github.com/WaterfallEngineering/SpookyJS
+
+
+Rerequisites:
+1. Install Casperjs: "$ brew install casperjs"
+2. Install Phantomjs "$ brew install phantomjs"
