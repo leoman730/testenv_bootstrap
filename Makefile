@@ -7,11 +7,8 @@ TEST_SLOW ?= 2000
 NODE_MODULES = $(PWD)/node_modules
 
 # XXX: below may be a bit too clever
-PID_FILE := $(PWD)/$(shell echo ".test-server-pid.$$RANDOM")
 
-make-pid-file:
-	echo "$RANDOM" > $(PID_FILE) ; \
-	cd $(PWD)
+PID_FILE := $(PWD)/$(shell echo ".test-server-pid.$$RANDOM")
 
 # If you need a local test server, fire this
 fixture-server:
@@ -43,14 +40,14 @@ fixture-server:
 #
 #
 
-example_cucumber_test:  make-pid-file
+example_cucumber_test:  fixture-server
 	@TEST_PORT=$(TEST_PORT) $(NODE_MODULES)/.bin/cucumber.js \
 			-f pretty \
 			examples/cucumber/features/ \
 			--require examples/cucumber/features/steps \
 			--require examples/cucumber/features/support ; \
 		STATUS=$$? ; \
-		#kill -9 `cat $(PID_FILE)` ; rm $(PID_FILE) ; \
+		kill -9 `cat $(PID_FILE)` ; rm $(PID_FILE) ; \
 		exit $$STATUS
 
 .PHONY: example_cucumber_test fixture-server make-pid-file
